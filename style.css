@@ -1,0 +1,223 @@
+:root{
+  --primary-color:rgba(13,110,135,0.75);
+  --secondary-color:rgba(229,148,0,0.9);
+  --overlay-color:rgba(24,39,58,0.85);
+  --menu-speed:0.75s;
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+html,body{
+  font-family: 'roboto', sans-serif;
+  line-height: 1.4rem;
+}
+/* this container is for centering */
+.container{
+  width:960px;
+ padding:0 3rem;
+  margin:auto;
+}
+/* showcase content */
+#showcase{
+
+  height: 100vh;
+  background:var(--primary-color);
+  color:#fff;
+  position:relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+#showcase h1{
+  font-size: 4rem;
+  padding:2rem;
+
+}
+#showcase p{
+  line-height: 1.2;
+  font-size:1.3rem;
+  padding:2rem;
+}
+#showcase::before{
+  content: "";
+  position:absolute;
+  top:0;
+  left:0;
+  background:url(showcase.jpg) no-repeat center center/cover;
+  height:100%;
+  width:100%;
+  z-index: -1;
+
+}
+#showcase .btn{
+  display: inline-block;
+  padding:10px;
+  background:var(--primary-color);
+  transition:all 0.5s ease-in-out;
+}
+#showcase a{
+  text-decoration: none;
+  color:#fff;
+
+}
+#showcase a:hover{
+  background:var(--secondary-color);
+}
+/* styling the humberger */
+
+/* start with the top layer menu-wrap */
+
+.menu-wrap{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index: 1;
+}
+/* styling the checkbox */
+.menu-wrap .toggler{
+  position:absolute;
+  top:0;
+  left:0;
+  width:50px;
+  height:50px;
+  opacity:0;
+  cursor: pointer;
+  z-index: 2;
+}
+/* humberger outline div */
+.menu-wrap .humberger{
+  width:60px;
+  height: 60px;
+  position:absolute;
+  top:0;
+  left:0;
+  padding: 1rem;
+  z-index: 1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background:var(--primary-color);
+  transition:all 0.4s ease;
+
+}
+/* creating first line in humberger div */
+.menu-wrap .humberger >div{
+  position: relative;
+  top:0;
+  left: 0;
+  width:100%;
+  height: 2px;
+  background:#fff;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  transition:all 0.4s ease;
+
+}
+/* creating second and third line in humberger div */
+.menu-wrap .humberger >div:before,
+ .menu-wrap .humberger >div::after{
+  content: "";
+  position:absolute;
+  top:-10px;
+  left:0;
+  width:100%;
+  height: 2px;
+  background:#fff;
+}
+
+.menu-wrap .humberger >div::after{
+  top:10px;
+  
+}
+
+/* styling humberger in a state of checked */
+
+.menu-wrap .toggler:checked +.humberger > div{
+  transform: rotate(135deg);
+}
+.menu-wrap .toggler:checked +.humberger > div:before ,
+.menu-wrap .toggler:checked +.humberger > div:after{
+  transform: rotate(90deg);
+  top:0;
+}
+
+/* on hover */
+.menu-wrap .toggler:checked:hover +.humberger>div{
+ transform: rotate(225deg);
+}
+
+/* menu div  with overlay dark*/
+.menu-wrap .menu{
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+ visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+/* adding overlay to menu div */
+.menu-wrap .menu>div{
+border-radius: 50%;
+height:200vh;
+width:200vw;
+ background:var(--overlay-color);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ align-items: center;
+ transform: scale(0);
+ transition: all 0.4s ease;
+  
+}
+.menu-wrap .menu > div > div  {
+  text-align: center;
+  max-width: 90vw;
+  max-height:100vh ;
+
+}
+.menu-wrap .menu > div > div >ul{
+  list-style: none;
+ 
+}
+.menu-wrap .menu > div > div >ul >li{
+  padding:2.5rem;
+
+}
+
+.menu-wrap .menu > div > div >ul >li > a{
+  text-decoration: none;
+  color:#fff;
+  text-transform: uppercase;
+  text-align: center;
+}
+.menu-wrap .menu > div > div >ul >li > a:hover{
+  background:var(--secondary-color);
+}
+
+/* give functionalility show the menu after checked state */
+.menu-wrap .toggler:checked ~ .menu{
+
+  visibility: visible;
+}
+.menu-wrap .toggler:checked ~ .menu > div {
+transform: scale(1);
+transition-duration:var(--menu-speed);
+
+}
+/* media queries for h1 */
+@media(max-width:968px){
+  #showcase h1{
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+}
+
